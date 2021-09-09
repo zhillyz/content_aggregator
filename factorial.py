@@ -5,5 +5,5 @@ def factorial(value):
         fac *= i
     print(fac)
     
-factorial(14)
+factorial(4)
 
