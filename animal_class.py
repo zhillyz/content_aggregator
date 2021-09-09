@@ -30,9 +30,3 @@ class Animal():
     def how_old(self):
         """Animal tells you its age"""
         print(self.name.title() + " is " + self.age + " old.")
-
-Larry = Animal('dog','Larry','2months')
-Larry.sit()
-Larry.roll_over()
-Larry.introduces()
-Larry.how_old()
