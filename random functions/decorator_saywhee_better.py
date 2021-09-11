@@ -8,4 +8,4 @@ def my_decorator(func):
 @my_decorator
 def say_whee():
     print("Whee!")
-print(say_whee())
+say_whee()
