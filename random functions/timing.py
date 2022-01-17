@@ -6,3 +6,4 @@ def timed_func(func_to_time):
         print(time.perf_counter() - start)
         return res
     return timed
+    #blah blah blah test

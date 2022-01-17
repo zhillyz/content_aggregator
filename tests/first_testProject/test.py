@@ -21,6 +21,12 @@ class TestSum(unittest.TestCase):
         with self.assertRaises(TypeError):
             result = Sum(data)
 
+    def test_negative_num(self):
+        """Test to see if negative number returns error."""
+        data = [-1,-2,-3]
+        result = Sum(data)
+        self.assertEqual(result,-6)
+
 
 
 if __name__ == '__main__':
