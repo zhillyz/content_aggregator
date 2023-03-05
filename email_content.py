@@ -5,12 +5,16 @@ from email.message import EmailMessage
 email_address = os.environ.get('EMAIL_ADD')
 email_password = os.environ.get('EMAIL_PASS')
 
-msg = EmailMessage()
-msg['Subject'] = 'Test email'
-msg['From'] = email_address
-msg['To'] = email_address
-msg.set_content('this is email')
+def sendEmail(subject,content):
+    msg = EmailMessage()
+    msg['Subject'] = subject
+    msg['From'] = email_address
+    msg['To'] = email_address
+    msg.set_content(content)
 
-with smtplib.SMTP_SSL('smtp-mail.outlook.com', port=465) as smtp:
-    smtp.login(email_address,email_password)
-    smtp.send_message(msg)
+    with smtplib.SMTP('smtp-mail.outlook.com', port=587) as smtp:
+        smtp.ehlo('mylowercasehost')
+        smtp.starttls()
+        smtp.ehlo('mylowercasehost')
+        smtp.login(email_address,email_password)
+        smtp.send_message(msg)

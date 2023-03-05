@@ -42,7 +42,7 @@ class RedditHotTopics(RedditSource):
         self.fetch()
         
     def fetch(self):
-        self.hot_submissions = self.reddit_con.subreddit(self.subreddit).search(query=self.query,limit=self.limit,sort='hot')
+        self.hot_submissions = self.reddit_con.subreddit(self.subreddit).search(query=str(self.query),limit=self.limit,sort='hot')
 
     def __repr__(self):
         urls = []
@@ -74,8 +74,7 @@ class NewsSource(Source):
         return '\n'.join(articles)
         
 if __name__ == '__main__':
-    # reddit_top_programming = RedditHotTopics('ukraine',subreddit='news',limit=10)
-    # print(reddit_top_programming)
+    reddit_top_programming = RedditHotTopics('ukraine',subreddit='news',limit=10)
+    print(reddit_top_programming)
     news = NewsSource('ukraine')
-    news.fetch()
     print(news)
