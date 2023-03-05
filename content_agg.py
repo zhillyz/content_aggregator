@@ -43,7 +43,7 @@ class RedditHotTopics(RedditSource):
         urls = []
         for submission in self.hot_submissions:
             urls.append(vars(submission)['url'])
-        return '/n'.join(urls)
+        return '\n'.join(urls)
     
 if __name__ == '__main__':
     reddit_top_programming = RedditHotTopics('funny')
