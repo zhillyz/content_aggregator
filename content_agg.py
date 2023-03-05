@@ -29,14 +29,15 @@ class RedditSource(Source):
     def fetch(self):
         pass
 
-class RedditHotProgramming(RedditSource):
+class RedditHotTopics(RedditSource):
 
-    def __init__(self) -> None:
+    def __init__(self,subreddit) -> None:
         self.reddit_con = super().connect()
         self.hot_submissions = []
+        self.subreddit = subreddit
         
     def fetch(self, limit: int):
-        self.hot_submissions = self.reddit_con.subreddit('programming').hot(limit=limit)
+        self.hot_submissions = self.reddit_con.subreddit(self.subreddit).hot(limit=limit)
 
     def __repr__(self):
         urls = []
@@ -45,6 +46,6 @@ class RedditHotProgramming(RedditSource):
         return '/n'.join(urls)
     
 if __name__ == '__main__':
-    reddit_top_programming = RedditHotProgramming()
+    reddit_top_programming = RedditHotTopics('funny')
     reddit_top_programming.fetch(limit=10)
     print(reddit_top_programming)
