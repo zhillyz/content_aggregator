@@ -1,7 +1,9 @@
 from abc import ABC, abstractmethod
 from newsapi import NewsApiClient
+import logging
 import praw
 import os
+import requests
 
 CLIENT_ID = os.environ.get('REDDIT_CLIENT_ID')
 CLIENT_SECRET = os.environ.get('REDDIT_CLIENT_SECRET')
@@ -72,9 +74,30 @@ class NewsSource(Source):
                 articles.append('Title: %s}'%article['title'])
                 articles.append('URL: %s'%article['url'])
         return '\n'.join(articles)
-        
+
+class TFLCrowding(Source):
+    ''' simple http request api to transport for london'''
+    def __init__(self,station,day=None,live=False):
+        self.url = f'https://api.tfl.gov.uk/crowding/{station}/'
+        if day:
+            if live:
+                live = False
+                logging.warning("Can\'t have day query and Live so setting Live to False")
+            self.url = self.url + str(day)
+        if live:
+            self.url = self.url + "Live"
+
+    def connect(self):
+        pass
+    
+    def fetch(self):
+        self.crowding = requests.get(url=self.url)
+        print('test')
+
 if __name__ == '__main__':
-    reddit_top_programming = RedditHotTopics('ukraine',subreddit='news',limit=10)
-    print(reddit_top_programming)
-    news = NewsSource('ukraine')
-    print(news)
+    # reddit_top_programming = RedditHotTopics('ukraine',subreddit='news',limit=10)
+    # print(reddit_top_programming)
+    # news = NewsSource('ukraine')
+    # print(news)
+    crowding = TFLCrowding('940GZZLUCHX')
+    crowding.fetch()
