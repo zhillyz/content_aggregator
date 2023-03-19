@@ -1,6 +1,6 @@
 from content_agg import RedditHotTopics, NewsSource
 from email_content import sendEmail
-query = 'ukraine'
+query = 'six nations'
 
 sources1 = RedditHotTopics(query)
 sources2 = NewsSource(query)
